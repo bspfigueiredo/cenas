@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: kube-news-ingress #nome do ingress
-  namespace: kube-news
+  namespace: cenas
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
