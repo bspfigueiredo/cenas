@@ -22,14 +22,12 @@ spec:
           ports:
             - containerPort: 8080
           env: #variaveis para o postgre
-          - name: DB_DATABASE
+          - name: auth.database
             value: "kubenews" 
-          - name: DB_USERNAME
+          - name: auth.username
             value: "kubenews" 
-          - name: DB_PASSWORD
-            value: "Pg#123" 
-          - name: DB_HOST
-            value: "postgre"
+          - name: auth.password
+            value: "Pg#123"
 
 ---
 
