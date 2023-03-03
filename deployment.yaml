@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 4 
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+       app: web
+      annotations: #
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: web
+          image: tpbsdocker/kube-news:latest 
+          ports:
+            - containerPort: 8080
+          env: #variaveis para o postgre
+          - name: DB_DATABASE
+            value: "kubenews" 
+          - name: DB_USERNAME
+            value: "kubenews" 
+          - name: DB_PASSWORD
+            value: "Pg#123" 
+          - name: DB_HOST
+            value: "postgre"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 8080 # direciona para a porta do pod
+  type: LoadBalancer
+  #type: LoadBalancer

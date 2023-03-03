@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kube-news-ingress #nome do ingress
+  namespace: kube-news
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kubenews.com #endereço do host alvo
+    http:
+      paths:
+       - path: "/"
+         pathType: Prefix
+         backend:
+          service:
+            name: web
+            port:
+              number: 80
